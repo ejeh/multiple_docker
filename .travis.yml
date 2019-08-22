@@ -16,8 +16,8 @@ after_success:
   - docker build -t escoba/multi-server ./server
   - docker build -t escoba/multi-worker ./worker
   # Before pushing to docker hub
-  # Login to the docker CLI
-  - echo "DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
   - docker push escoba/multi-client
   - docker push escoba/multi-nginx
