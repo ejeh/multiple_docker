@@ -23,8 +23,7 @@ after_success:
   - docker push escoba/multi-nginx
   - docker push escoba/multi-server
   - docker push escoba/multi-worker
-install:
-  - travis_wait 30 mvn install
+install: travis_wait 30 mvn install
 # deploy:
 #   provider: elasticbeanstalk
 #   region: us-west-1
