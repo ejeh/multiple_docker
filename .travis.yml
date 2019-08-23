@@ -15,8 +15,6 @@ after_success:
   - docker build -t escoba/multi-nginx ./nginx
   - docker build -t escoba/multi-server ./server
   - docker build -t escoba/multi-worker ./worker
-install:
-  - travis_wait 30 mvn install
   # Before pushing to docker hub
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
@@ -25,6 +23,8 @@ install:
   - docker push escoba/multi-nginx
   - docker push escoba/multi-server
   - docker push escoba/multi-worker
+install:
+  - travis_wait 30 mvn install
 # deploy:
 #   provider: elasticbeanstalk
 #   region: us-west-1
