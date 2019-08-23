@@ -10,7 +10,9 @@ before_install:
 script:
   - docker run escoba/react-test npm test -- --coverage
 
-install: travis_wait mvn 30 install
+install:
+  - travis_wait mvn 30 install
+
 after_success:
   - docker build -t escoba/multi-client ./client
   - docker build -t escoba/multi-nginx ./nginx
