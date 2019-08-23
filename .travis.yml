@@ -15,6 +15,8 @@ after_success:
   - docker build -t escoba/multi-nginx ./nginx
   - docker build -t escoba/multi-server ./server
   - docker build -t escoba/multi-worker ./worker
+install:
+  - travis_wait 30 mvn install
   # Before pushing to docker hub
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
@@ -23,3 +25,21 @@ after_success:
   - docker push escoba/multi-nginx
   - docker push escoba/multi-server
   - docker push escoba/multi-worker
+# deploy:
+#   provider: elasticbeanstalk
+#   region: us-west-1
+#   app: multi-docker
+#   env: MultiDocker-env
+#   bucket_name: elasticbeanstalk-us-west-1-306476627547
+#   bucket_path: docker-multi
+#   on:
+#     branch: master
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key:
+#     secure: $AWS_SECRET_KEY
+# deploy:
+#   provider: heroku
+#   api_key:
+#     secure: KEY
+#   app: multidocker
+#   on: ejeh/multiple_docker
