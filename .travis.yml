@@ -10,6 +10,7 @@ before_install:
 script:
   - docker run escoba/react-test npm test -- --coverage
 
+install: travis_wait mvn 30 install
 after_success:
   - docker build -t escoba/multi-client ./client
   - docker build -t escoba/multi-nginx ./nginx
@@ -23,7 +24,6 @@ after_success:
   - docker push escoba/multi-nginx
   - docker push escoba/multi-server
   - docker push escoba/multi-worker
-install: travis_wait mvn install
 # deploy:
 #   provider: elasticbeanstalk
 #   region: us-west-1
