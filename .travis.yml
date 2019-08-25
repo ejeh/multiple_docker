@@ -12,11 +12,11 @@ before_install:
 script:
   - docker run escoba/react-test npm test -- --coverage
 
-  # after_success:
-  - docker build -t escoba/multi-client ./client
-  - docker build -t escoba/multi-nginx ./nginx
-  - docker build -t escoba/multi-server ./server
-  - docker build -t escoba/multi-worker ./worker
+after_success:
+  - travis_wait 20 docker build -t escoba/multi-client ./client
+  - travis_wait 20 docker build -t escoba/multi-nginx ./nginx
+  - travis_wait 20 docker build -t escoba/multi-server ./server
+  - travis_wait 20 docker build -t escoba/multi-worker ./worker
   # Before pushing to docker hub
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
